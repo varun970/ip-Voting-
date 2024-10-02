@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="voting.css">
+    <title>Online Voting System</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Online Voting System</h1>
+        <form id="votingForm" action="submit_vote.php" method="post">
+            <label for="voterId">Voter ID:</label>
+            <input type="text" id="voterId" name="voterId" required>
+
+            <label for="mobileNumber">Mobile Number:</label>
+            <input type="tel" id="mobileNumber" name="mobileNumber" required>
+
+            <label for="country">Country:</label>
+            <select id="country" name="country" onchange="loadStates()">
+                <option value="">Select Country</option>
+		<option value="India">India</option>
+		<option value="Bangladesh">Bangladesh</option>
+		<option vaue="Sri Lanka">Sri Lanka</option>
+                <!-- Add options dynamically using JavaScript -->
+            </select>
+
+            <label for="state">State:</label>
+            <select id="state" name="state" onchange="loadDistricts()">
+                <option value="">Select State</option>
+                <!-- Add options dynamically using JavaScript -->
+            </select>
+
+            <label for="district">District:</label>
+            <select id="district" name="district" onchange="loadPollingPlaces()">
+                <option value="">Select District</option>
+                <!-- Add options dynamically using JavaScript -->
+            </select>
+
+            <label for="pollingPlace">Polling Place:</label>
+            <select id="pollingPlace" name="pollingPlace">
+                <option value="">Select Polling Place</option>
+                <!-- Add options dynamically using JavaScript -->
+            </select>
+
+            <label for="candidates">Candidate List:</label>
+            <select id="candidates" name="candidates">
+                <option value="">Select Candidate</option>
+               	<option value="Shiva">Shiva</option>
+		<option value="Ram">Ram</option>
+            </select>
+
+            <input type="submit" name="Submit Vote">
+        </form>
+    </div>
+
+    <script>
+	function loadStates() {
+		var country = document.getElementById("country").value;
+		var stateDropdown = document.getElementById("state");
+    // Clear existing options
+    	stateDropdown.innerHTML = "<option value=''>Select State</option>";
+
+    // Add states based on the selected country
+    if (country === "India") {
+        var states = ["Andhra Pradesh","Tamil Nadu","Telangana"];
+        populateDropdown(stateDropdown, states);
+    }
+    if(country==="Bangladesh") {
+	var states = ["Rangpur","Chattogram","Dhaka"];
+	populateDropdown(stateDropdown, states);
+	}
+	 if(country==="Sri Lanka") {
+	var states = ["Southern","Central","Western Province"];
+	populateDropdown(stateDropdown, states);
+	}
+}
+
+function loadDistricts() {
+    var state = document.getElementById("state").value;
+    var districtDropdown = document.getElementById("district");
+
+    // Clear existing options
+    districtDropdown.innerHTML = "<option value=''>Select District</option>";
+
+    // Add districts based on the selected state
+    if (state === "Andhra Pradesh") {
+        var districts = ["Chittoor", "Krishna","Kadapa"];
+        populateDropdown(districtDropdown, districts);
+    }
+	if (state === "Telangana") {
+        var districts = ["Jayashankar", "Warangal","Khammam"];
+        populateDropdown(districtDropdown, districts);
+    }
+	if (state === "Tamil Nadu") {
+        var districts = ["Chengalpattu", "Coimbatore","Tiruvannamalai"];
+        populateDropdown(districtDropdown, districts);
+    }
+	if (state === "Rangpur") {
+        var districts = ["Kurigram", "Rangpur","Dinajpur"];
+        populateDropdown(districtDropdown, districts);
+    }
+	if (state === "Chattogram") {
+        var districts = ["Feni", "Lakshmipur","Rangamati"];
+        populateDropdown(districtDropdown, districts);
+    }
+	if (state === "Dhaka") {
+        var districts = ["Tangail", "Madaripur","Gazipur"];
+        populateDropdown(districtDropdown, districts);
+    }
+	if (state === "Southern") {
+        var districts = ["Galle", "Matara","Hambantota"];
+        populateDropdown(districtDropdown, districts);
+    }
+	if (state === "Central") {
+        var districts = ["Kandy", "Matale","Nuwara Eliya"];
+        populateDropdown(districtDropdown, districts);
+    }
+	if (state === "Western Province") {
+        var districts = ["Colombo", "Gampaha","Kalutara"];
+        populateDropdown(districtDropdown, districts);
+    }
+    // Add more conditions for other states
+}
+
+function loadPollingPlaces() {
+    // Similar logic as above for loading polling places
+	var district = document.getElementById("district").value;
+    var pollingPlaceDropdown = document.getElementById("pollingPlace");
+
+    // Clear existing options
+    pollingPlaceDropdown.innerHTML = "<option value=''>Select Polling Place</option>";
+
+    // Add polling place based on the selected district
+    if (district === "Chittoor") {
+        var pollingplaces = ["Bandapalli", "Cheelapalli"];
+        populateDropdown(pollingPlaceDropdown, pollingplaces);
+    }
+	if(district ==="Krishna") {
+		var pollingplaces = ["B.N.R Peta","Ramapuram"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Kadapa") {
+		var pollingplaces = ["Mydukur","Nandyalam Peta"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Jayashankar") {
+		var pollingplaces = ["Venkatraopally","Chityal"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Warangal") {
+		var pollingplaces = ["Narsampet","Warangal East"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Khammam") {
+		var pollingplaces = ["Palair","Wyra"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Chengalpattu") {
+		var pollingplaces = ["Pallavaram","Tambaram"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Coimbatore") {
+		var pollingplaces = ["Sulur","Mettupalayam"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Tiruvannamalai") {
+		var pollingplaces = ["Adaiyur","Vengikal"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Kurigram") {
+		var pollingplaces = ["Satair","Biral"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Rangpur") {
+		var pollingplaces = ["Bhiail","Amarpur"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Dinajpur") {
+		var pollingplaces = ["Eluary","Singra"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Feni") {
+		var pollingplaces = ["Ward No-05","Ward No-06"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Lakshmipur") {
+		var pollingplaces = ["Uria","Boali"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Rangamati") {
+		var pollingplaces = ["Gidari","Nakai"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Tangail") {
+		var pollingplaces = ["Shapla","New Model Degree College"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Madaripur") {
+		var pollingplaces = ["Dhaka City College","Ideal College"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Gazipur") {
+		var pollingplaces = ["Jameya","Teacher Training College"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Galle") {
+		var pollingplaces = ["Balapitiya","Habaraduwa"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Matara") {
+		var pollingplaces = ["Horana","Panadura"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Hambantota") {
+		var pollingplaces = ["Beliatta","Tangelle"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Kandy") {
+		var pollingplaces = ["Kandy","Gampola"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Matale") {
+		var pollingplaces = ["Pattota","Matale"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Nuwara Eliya") {
+		var pollingplaces = ["Walapane","Kotmale"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Colombo") {
+		var pollingplaces = ["Kotte","Kesbewa"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Gampaha") {
+		var pollingplaces = ["Ja-Ela","Wattla"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+	if(district ==="Kalutara") {
+		var pollingplaces = ["Horana","Beruwala"];
+		populateDropdown(pollingPlaceDropdown,pollingplaces);
+	}
+}
+function loadCandidates() {
+    // Similar logic as above for loading candidates
+	var pollingPlace = document.getElementById("pollingPlace").value;
+    var candidatesDropdown = document.getElementById("candidates");
+
+    // Clear existing options
+    candidatesDropdown.innerHTML = "<option value=''>Select Candidate</option>";
+
+    // Add candidates based on the selected polling place
+    if (polingPlace === "Bandapalli") {
+        var Candidates = ["Shiva", "Ram"];
+        populateDropdown(candidatesDropdown, Candidates);
+    }
+	if (polingPlace === "Cheelapalli") {
+        var Candidates = ["Ruchi","Tharun"];
+        populateDropdown(candidatesDropdown, Candidates);
+    }
+	if (polingPlace === "B.N.R Peta") {
+        var Candidates = ["Krishna", "Laxmi"];
+        populateDropdown(candidatesDropdown, Candidates);
+    }
+	if (polingPlace === "Ramapuram") {
+        var Candidates = ["Varun", "Ajay"];
+        populateDropdown(candidatesDropdown, Candidates);
+    }
+}
+
+function populateDropdown(dropdown, options) {
+    options.forEach(function(option) {
+        var optionElement = document.createElement("option");
+        optionElement.value = option;
+        optionElement.text = option;
+        dropdown.add(optionElement);
+    });
+}
+
+    </script>
+</body>
+</html>
